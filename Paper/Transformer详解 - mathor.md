@@ -21,11 +21,11 @@ Transformer 和 LSTM 的最大区别，就是 LSTM 的训练是迭代的、串�
 
 Transformer 模型主要分为两大部分，分别是 **Encoder** 和 **Decoder**。**Encoder** 负责把输入（语言序列）隐射成**隐藏层**（下图中第 2 步用九宫格代表的部分），然后解码器再把隐藏层映射为自然语言序列。例如下图机器翻译的例子（Decoder 输出的时候，是通过 N 层 Decoder Layer 才输出一个 token，并不是通过一层 Decoder Layer 就输出一个 token）
 
-![](https://s1.ax1x.com/2020/04/25/JyCdy9.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272212514.png)
 
 本篇文章大部分内容在于解释 **Encoder** 部分，即把**自然语言序列映射为隐藏层的数学表达的过程**。理解了 Encoder 的结构，再理解 Decoder 就很简单了
 
-![](https://s1.ax1x.com/2020/04/25/JyCLlQ.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272212013.png)
 
 上图为 Transformer Encoder Block 结构图，注意：下面的内容标题编号分别对应着图中 1,2,3,4 个方框的序号
 
@@ -69,7 +69,7 @@ plt.xlabel("hidden dimension")
 plt.ylabel("sequence length")
 ```
 
-![](https://s1.ax1x.com/2020/04/25/JyRShD.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213581.png)
 
 ```null
 plt.figure(figsize=(8, 5))
@@ -81,7 +81,7 @@ plt.xlabel("Sequence length")
 plt.ylabel("Period of Positional Encoding")
 ```
 
-![](https://s1.ax1x.com/2020/04/25/JyhUC8.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213896.png)
 
 ### 2\. Self Attention Mechanism
 
@@ -99,7 +99,7 @@ plt.ylabel("Period of Positional Encoding")
             [1, 0, 1]
 ```
 
-![](https://s1.ax1x.com/2020/07/11/UlvyUP.gif#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213590.gif)
 
 之后还需要将得到的值经过 softmax，使得它们的和为 1（见下图）
 
@@ -107,7 +107,7 @@ plt.ylabel("Period of Positional Encoding")
 softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 ```
 
-![](https://z3.ax1x.com/2021/04/20/c7wCNR.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213589.png)
 
 有了权重之后，将权重其分别乘以对应字的**值向量** vt（见下图）
 
@@ -117,7 +117,7 @@ softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 0.5 * [2, 6, 3] = [1.0, 3.0, 1.5]
 ```
 
-![](https://s1.ax1x.com/2020/07/11/UlzCes.gif#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213042.gif)
 
 最后将这些**权重化后的值向量求和**，得到第一个字的输出（见下图）
 
@@ -128,11 +128,11 @@ softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 = [2.0, 7.0, 1.5]
 ```
 
-![](https://s1.ax1x.com/2020/07/11/Ulzd0A.gif#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213783.gif)
 
 对其它的输入向量也执行相同的操作，即可得到通过 self-attention 后的所有输出
 
-![](https://s1.ax1x.com/2020/07/11/Ulz4kq.gif#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213657.gif)
 
 #### 矩阵计算
 
@@ -140,25 +140,25 @@ softmax([2, 4, 4]) = [0.0, 0.5, 0.5]
 
 第一步就不是计算某个时刻的 qt,kt,vt 了，而是一次计算所有时刻的 Q,K 和 V。计算过程如下图所示，这里的输入是一个矩阵 X，矩阵第 t 行为第 t 个词的向量表示 xt
 
-![](https://z3.ax1x.com/2021/04/20/c7wF9x.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213182.png)
 
 接下来将 Q 和 KT 相乘，然后除以 dk（这是论文中提到的一个 trick），经过 softmax 以后再乘以 V 得到输出
 
-![](https://z3.ax1x.com/2021/04/20/c7wk36.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213313.png)
 
 #### Multi-Head Attention
 
 这篇论文还提出了 Multi-Head Attention 的概念。其实很简单，前面定义的一组 Q,K,V 可以让一个词 attend to 相关的词，我们可以定义多组 Q,K,V，让它们分别关注不同的上下文。计算 Q,K,V 的过程还是一样，只不过线性变换的矩阵从一组 (WQ,WK,WV) 变成了多组 (W0Q,W0K,W0V) ，(W1Q,W1K,W1V)，… 如下图所示
 
-![](https://z3.ax1x.com/2021/04/20/c7wEjO.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213820.png)
 
 对于输入矩阵 X，每一组 Q、K 和 V 都可以得到一个输出矩阵 Z。如下图所示
 
-![](https://z3.ax1x.com/2021/04/20/c7weDe.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213906.png)
 
 #### Padding Mask
 
-![](https://s1.ax1x.com/2020/04/25/Jy5rt0.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213598.png)
 
 上面 Self Attention 的计算过程中，我们通常使用 mini-batch 来计算，也就是一次计算多句话，即 X 的维度是 `[batch_size, sequence_length]`，sequence\_length​是句长，而一个 mini-batch 是由多个不等长的句子组成的，我们需要按照这个 mini-batch 中最大的句长对剩余的句子进行补齐，一般用 0 进行填充，这个过程叫做 padding
 
@@ -190,11 +190,11 @@ LayerNorm(x)\=xij−μjσj2+ϵ
 
 然后用**每一列**的**每一个元素**减去**这列的均值**，再除以**这列的标准差**，从而得到归一化后的数值，加 ϵ 是为了防止分母为 0
 
-![](https://z3.ax1x.com/2021/04/20/c7wtbQ.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213468.png)
 
 下图展示了更多细节：输入 x1,x2 经 self-attention 层之后变成 z1,z2，然后和输入 x1,x2 进行残差连接，经过 LayerNorm 后输出给全连接层。全连接层也有一个残差连接和一个 LayerNorm，最后再输出给下一个 Encoder（每个 Encoder Block 中的 FeedForward 层权重都是共享的）
 
-![](https://z3.ax1x.com/2021/04/20/c7wD2V.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272213885.png)
 
 ### 4\. Transformer Encoder 整体结构
 
@@ -234,7 +234,7 @@ Xhidden∈Rbatch\_size∗seq\_len.∗embed\_dim
 
 和 Encoder 一样，上面三个部分的每一个部分，都有一个残差连接，后接一个 **Layer Normalization**。Decoder 的中间部件并不复杂，大部分在前面 Encoder 里我们已经介绍过了，但是 Decoder 由于其特殊的功能，因此在训练时会涉及到一些细节
 
-![](https://z3.ax1x.com/2021/04/20/c7wyKU.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272214225.png)
 
 #### Masked Self-Attention
 
@@ -242,11 +242,11 @@ Xhidden∈Rbatch\_size∗seq\_len.∗embed\_dim
 
 举个例子，Decoder 的 ground truth 为 "<start> I am fine"，我们将这个句子输入到 Decoder 中，经过 WordEmbedding 和 Positional Encoding 之后，将得到的矩阵做三次线性变换（WQ,WK,WV）。然后进行 self-attention 操作，首先通过 Q×KTdk 得到 Scaled Scores，接下来非常关键，我们要对 Scaled Scores 进行 Mask，举个例子，当我们输入 "I" 时，模型目前仅知道包括 "I" 在内之前所有字的信息，即 "<start>" 和 "I" 的信息，不应该让其知道 "I" 之后词的信息。道理很简单，我们做预测的时候是按照顺序一个字一个字的预测，怎么能这个字都没预测完，就已经知道后面字的信息了呢？Mask 非常简单，首先生成一个下三角全 0，上三角全为负无穷的矩阵，然后将其与 Scaled Scores 相加即可
 
-![](https://z3.ax1x.com/2021/04/20/c7w48x.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272214976.png)
 
 之后再做 softmax，就能将 - inf 变为 0，得到的这个矩阵即为每个字之间的权重
 
-![](https://s1.ax1x.com/2020/07/12/U3FCQ0.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272214292.png)
 
 Multi-Head Self-Attention 无非就是并行的对上述步骤多做几次，前面 Encoder 也介绍了，这里就不多赘述了
 
@@ -254,13 +254,13 @@ Multi-Head Self-Attention 无非就是并行的对上述步骤多做几次，前
 
 其实这一部分的计算流程和前面 Masked Self-Attention 很相似，结构也一摸一样，唯一不同的是这里的 K,V 为 Encoder 的输出，Q 为 Decoder 中 Masked Self-Attention 的输出
 
-![](https://s1.ax1x.com/2020/07/12/U3EwOx.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272214626.png)
 
 ### 6\. 总结
 
 到此为止，Transformer 中 95% 的内容已经介绍完了，我们用一张图展示其完整结构。不得不说，Transformer 设计的十分巧夺天工
 
-![](https://z3.ax1x.com/2021/04/20/c7w7rD.png#shadow)
+![](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202109272214874.png)
 
 下面有几个问题，是我从网上找的，感觉看完之后能对 Transformer 有一个更深的理解
 
