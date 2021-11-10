@@ -1,4 +1,10 @@
-> 论文：Modeling Relational Data with Graph Convolutional Networks 作者：Michael Schlichtkrull, Thomas N. Kipf（GCN的作者）, Peter Bloem, Rianne van den Berg, Ivan Titov, Max Welling 论文链接：[https://arxiv.org/abs/1703.06103](https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1703.06103) Github链接：[https://github.com/tkipf/relational-gcn](https://link.zhihu.com/?target=https%3A//github.com/tkipf/relational-gcn) 期刊： ESWC 2018
+> 论文：Modeling Relational Data with Graph Convolutional Networks 
+>
+> 作者：Michael Schlichtkrull, Thomas N. Kipf（GCN的作者）, Peter Bloem, Rianne van den Berg, Ivan Titov, Max Welling 
+>
+> 论文链接：[https://arxiv.org/abs/1703.06103](https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1703.06103) Github链接：[https://github.com/tkipf/relational-gcn](https://link.zhihu.com/?target=https%3A//github.com/tkipf/relational-gcn) 
+>
+> 期刊： ESWC 2018
 
 ## 引言
 

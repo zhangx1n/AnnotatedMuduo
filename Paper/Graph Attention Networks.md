@@ -1,4 +1,6 @@
-> 原文：[Graph Attention Networks](https://arxiv.org/pdf/1710.10903.pdf)
+> 论文：[Graph Attention Networks](https://arxiv.org/pdf/1710.10903.pdf)
+>
+> 
 
 ## 引言
 

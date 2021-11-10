@@ -1,4 +1,4 @@
-> [DeepWalk: Online Learning of Social Representations]([1403.6652.pdf (arxiv.org)](https://arxiv.org/pdf/1403.6652.pdf))
+> [DeepWalk: Online Learning of Social Representations](https://arxiv.org/pdf/1403.6652.pdf)
 
 ## Abstract
 
