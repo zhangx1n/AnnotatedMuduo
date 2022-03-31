@@ -1,0 +1,5 @@
+- [ ] consecutive adj. 连续的
+- [ ] prominent adj. 重要的，著名的
+- [ ] to-and-fro 往复的 to-and-fro relationship
+- [ ] underneath  prep. 在...下面    n. 底部底面  adj. 下面的，底层的
+- [ ] 

@@ -1,4 +1,4 @@
-> Tilte: [Wang X, Ji H, Shi C, et al. Heterogeneous graph attention network[C]//The World Wide Web Conference. 2019: 2022-2032.](https://arxiv.org/pdf/1903.07293.pdf)
+> Paper: [Wang X, Ji H, Shi C, et al. Heterogeneous graph attention network[C]//The World Wide Web Conference. 2019: 2022-2032.](https://arxiv.org/pdf/1903.07293.pdf)
 >
 > Author: Xiao Wang,Houye Ji, Chuan Shi, Bai Wang (Beijing University),  Peng Cui, P. Yu (Tsing hua University)
 >
@@ -16,9 +16,16 @@
 
 ### Node-level Attention
 
-由于是异构图，不同的节点有不同的属性特征，首先要给节点的特征的维度变成一样的，可以通过mlp等。$\mathbf{h}_{i}^{\prime}=\mathbf{M}_{\phi_{i}} \cdot \mathbf{h}_{i}$，$M$: transformation matrix ， $\mathbf{h}_{i}^{\prime}$: 新的节点特征，维度相同
+![image-20211216141247584](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202112161412810.png)
 
-然后用self-attention学习两个节点（这两个节点是通过mate-path$\Phi$连接的）间的注意力。$e_{i j}^{\Phi}=a t t_{n o d e}\left(\mathbf{h}_{i}^{\prime}, \mathbf{h}_{j}^{\prime} ; \Phi\right)$,
+一个节点在同一种meta-path下可能连接好几个邻居节点，但是这几个节点也应该有不同的权重。
+
+《终结者》将与《泰坦尼克号》和《终结者2》相连，都是由导演詹姆斯·卡梅隆执导。为了更好地确定《终结者》是科幻电影，模型应该更多地关注《终结者2》，而不是《泰坦尼克号》。
 
 ### Semantic-level Attention
 
+不同的meta-path应该对应不一样的权重，终结者和终结者2通过电影-演员-电影(都由施瓦辛格主演)或者和《鸟人》通过电影-年份-电影(均摄于1984年)联系。然而，当确定电影的类型时，很明显电影-演员-电影比电影-年份-电影更重要。
+
+## 
+
+![preview](https://cdn.jsdelivr.net/gh/Zhangxin98/Note@main/img/202112161427369.jpeg)
