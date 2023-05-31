@@ -1,1 +1,0 @@
-![preview](https://pic2.zhimg.com/v2-343630aba1e1e62144cb335d29ca8381_r.jpg)
